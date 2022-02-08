@@ -3,7 +3,7 @@ const { Folder } = require("../db");
 const postFolder = async (req, res, next) => {
   try {
     const folder = {
-      name: req.body.name,
+      name: req.body.folder_name,
     };
 
     const folderNameExist = await Folder.findOne({
@@ -24,6 +24,7 @@ const postFolder = async (req, res, next) => {
 const getFolders = async (req, res, next) => {
   try {
     const folders = await Folder.findAll({
+      attributes: ["id", "name"],
       //   include: { model: User, attributes: ["username"] },
     });
 
