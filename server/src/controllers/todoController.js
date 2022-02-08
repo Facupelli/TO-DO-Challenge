@@ -23,10 +23,34 @@ const postTodo = async (req, res, next) => {
   }
 };
 
+const putTodo = async (req, res, next) => {
+  try {
+    const {todoId, done} = req.body
+
+    if(todoId){
+      const todo = await Todo.findByPk(todoId);
+      console.log('todo', todo)
+      if(todo){
+        if(done){
+          todo.done = done
+          await todo.save()
+          res.json({ message: "Successfully edited todo" });
+        }
+      }
+
+    }else {
+      res.status(400).json({ message: "Todo id is required" });
+    }
+
+  } catch (e) {
+    next(e);
+  }
+};
+
 const getTodos = async (req, res, next) => {
   try {
     const todos = await Todo.findAll({
-    //   include: { model: User, attributes: ["username"] },
+      //   include: { model: User, attributes: ["username"] },
     });
 
     res.json(todos);
@@ -37,24 +61,20 @@ const getTodos = async (req, res, next) => {
 
 const getTodosByFolderId = async (req, res, next) => {
   try {
-
-    const folderId = req.query.id
+    const folderId = req.query.id;
 
     const todos = await Folder.findAll({
       where: {
         id: folderId,
       },
-      include: { model: Todo, as: 'todoFolder' },
+      include: { model: Todo, as: "todoFolder" },
     });
     todos
       ? res.status(200).json(todos)
       : res.status(500).json({ message: "cannot get" });
-
-
   } catch (e) {
     next(e);
   }
 };
 
-
-module.exports = { postTodo, getTodos, getTodosByFolderId };
+module.exports = { postTodo, getTodos, getTodosByFolderId, putTodo };

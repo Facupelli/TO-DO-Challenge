@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios"
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-
-export const Todos = ({ todos, folderId }) => {
+export const Todos = ({ todos, folderId, setTodos }) => {
   const [showAddTodo, setShowAddTodo] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
-   //HANDLE ADD FOLDER ---------------------------
+  //HANLDE CHECKBOC -----------------------------
 
-   const handleShowInput = () => {
+  const handleChange = (id) => {
+    const data = {
+      todoId: id,
+      done: true,
+    };
+    axios.put("/todo", data);
+  };
+
+  //HANDLE ADD FOLDER ---------------------------
+
+  const handleShowInput = () => {
     setShowInput(true);
     setShowAddTodo(false);
   };
@@ -32,14 +41,16 @@ export const Todos = ({ todos, folderId }) => {
 
   const onSubmit = async (data) => {
     try {
-        const todo = {
-            todo_name: data.todo_name,
-            folderId,
-        }
+      const todo = {
+        todo_name: data.todo_name,
+        folderId,
+      };
       const response = await axios.post("/todo", todo);
       reset();
       handleCancelAddFolder();
-    //   axios.get("/folder").then((res) => setFolders(res.data));
+      axios
+        .get(`/todo?id=${folderId}`)
+        .then((res) => setTodos(res.data[0].todoFolder));
     } catch (e) {
       console.log(e);
     }
@@ -87,9 +98,16 @@ export const Todos = ({ todos, folderId }) => {
         {todos &&
           todos.length > 0 &&
           todos.map((el) => (
-            <div key={el.id} className="bg-main  rounded mt-2 p-2 flex items-center" >
+            <div
+              key={el.id}
+              className="bg-main  rounded mt-2 p-2 flex items-center"
+            >
               <p>{el.name}</p>
-              <input type="checkbox" className="ml-auto"/>
+              <input
+                onChange={() => handleChange(el.id)}
+                type="checkbox"
+                className="ml-auto"
+              />
             </div>
           ))}
       </div>

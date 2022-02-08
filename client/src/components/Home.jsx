@@ -6,37 +6,46 @@ import axios from "axios";
 export const Home = () => {
   const [folders, setFolders] = useState([]);
   const [folderId, setFolderId] = useState(null);
-  console.log(folderId)
 
   const [showTodos, setShowTodos] = useState(false);
   const [todos, setTodos] = useState([]);
-
-  console.log(todos);
 
   useEffect(() => {
     axios.get("/folder").then((res) => setFolders(res.data));
   }, []);
 
   const handleShowTodos = (id) => {
-    setShowTodos(!showTodos);
+    setShowTodos(true);
     axios.get(`/todo?id=${id}`).then((res) => setTodos(res.data[0].todoFolder));
     setFolderId(id);
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 m-10 w-full ">
-      <div className="col-span-1 p-4 bg-main rounded">
-        <Folders
-          folders={folders}
-          setFolders={setFolders}
-          setShowTodos={setShowTodos}
-          showTodos={showTodos}
-          setTodos={setTodos}
-          handleShowTodos={handleShowTodos}
-        />
+    <div className="w-full mt-10 mx-20">
+      <div className="mb-10 flex justify-center">
+        <div>
+          <p className="font-bold text-4xl">TODO APP</p>
+          <p className="text-gray-500">by Facupelli</p>
+        </div>
       </div>
-      <div className="col-span-1 p-4 bg-mainLight rounded">
-        {showTodos && <Todos todos={todos} folderId={folderId} />}
+      <div className="grid grid-cols-2 gap-6 w-full ">
+        <div className="col-span-1 p-4 bg-main rounded">
+          <Folders
+            folders={folders}
+            setFolders={setFolders}
+            handleShowTodos={handleShowTodos}
+            folderId={folderId}
+          />
+        </div>
+        <div className="col-span-1 p-4 bg-mainLight rounded">
+          {showTodos && (
+            <Todos
+              todos={todos}
+              setTodos={setTodos}
+              folderId={folderId}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

@@ -6,10 +6,12 @@ module.exports = {
     extend: {},
     colors: {
       white: colors.white,
+      gray: colors.gray,
       main: "#F4D0A1",
       mainDark: "#A8885E",
       mainLight: "#FFE4C2",
       secondary: "#4D88A8",
+      secondaryLight: "#8098A6",
       secondary2: "#A2D7F5",
     },
   },

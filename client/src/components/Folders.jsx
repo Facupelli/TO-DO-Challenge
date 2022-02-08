@@ -2,14 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFolder,
+  faFolderOpen,
   faCaretUp,
+  faCaretRight,
   faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-export const Folders = ({ folders, setFolders, setShowTodos, showTodos, setTodos, handleShowTodos }) => {
+export const Folders = ({ folders, setFolders, handleShowTodos, folderId, }) => {
   const [showAddFolder, setShowAddFolder] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
@@ -17,7 +19,6 @@ export const Folders = ({ folders, setFolders, setShowTodos, showTodos, setTodos
 
   const handleClickOptions = () => {};
 
-  
   //HANDLE ADD FOLDER ---------------------------
 
   const handleShowInput = () => {
@@ -95,10 +96,17 @@ export const Folders = ({ folders, setFolders, setShowTodos, showTodos, setTodos
             <div
               onClick={() => handleShowTodos(el.id)}
               key={el.id}
-              className="flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md cursor-pointer"
+              className={`flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md cursor-pointer ${
+                folderId === el.id ? "shadow-inner bg-secondaryLight" : ""
+              }`}
             >
-              <FontAwesomeIcon icon={faFolder} size="lg" />
-              <p>{el.name}</p>
+              {folderId === el.id ? (
+                <FontAwesomeIcon icon={faFolderOpen} size="lg" />
+              ) : (
+                <FontAwesomeIcon icon={faFolder} size="lg" />
+              )}
+
+              <p className={``}>{el.name}</p>
               <div ref={container} className="ml-auto relative">
                 <FontAwesomeIcon
                   onClick={handleClickOptions}
@@ -106,8 +114,11 @@ export const Folders = ({ folders, setFolders, setShowTodos, showTodos, setTodos
                   size="lg"
                 />
               </div>
-
-              <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
+              {folderId === el.id ? (
+                <FontAwesomeIcon icon={faCaretRight} size="lg" className="" />
+              ) : (
+                <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
+              )}
             </div>
           ))}
       </div>
