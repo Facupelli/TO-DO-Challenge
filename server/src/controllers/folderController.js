@@ -7,7 +7,7 @@ const postFolder = async (req, res, next) => {
     };
 
     const folderNameExist = await Folder.findOne({
-      where: { userId: room.userId, name: room.name },
+      where: { name: folder.name },
     });
 
     if (folderNameExist) {
@@ -24,7 +24,7 @@ const postFolder = async (req, res, next) => {
 const getFolders = async (req, res, next) => {
   try {
     const folders = await Folder.findAll({
-    //   include: { model: User, attributes: ["username"] },
+      //   include: { model: User, attributes: ["username"] },
     });
 
     res.json(folders);
