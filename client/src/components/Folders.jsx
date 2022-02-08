@@ -5,36 +5,110 @@ import {
   faCaretUp,
   faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
-export const Folders = ({ folders }) => {
+export const Folders = ({ folders, setFolders }) => {
+  const [showAddFolder, setShowAddFolder] = useState(true);
+  const [showInput, setShowInput] = useState(false);
 
   const container = useRef(document.createElement("div"));
 
-  const handleClickOptions = () => {
+  const handleClickOptions = () => {};
+
+  //HANDLE ADD FOLDER ---------------------------
+
+  const handleShowInput = () => {
+    setShowInput(true);
+    setShowAddFolder(false);
+  };
+
+  const handleCancelAddFolder = () => {
+    setShowAddFolder(true);
+    setShowInput(false);
+  };
+
+  //REACT HOOK FORM  ------------------------------------------
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("/folder", data);
+      reset();
+      handleCancelAddFolder();
+      axios.get("/folder").then((res) => setFolders(res.data));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <div>
-      {folders &&
-        folders.length > 0 &&
-        folders.map((el) => (
+      <div>
+        {showAddFolder && (
           <div
-            key={el.id}
-            className="flex items-center gap-4 bg-secondary2 text-white font-semibold mt-2 p-4 rounded-md cursor-pointer"
+            onClick={handleShowInput}
+            className="flex items-center gap-2 font-semibold mb-4 cursor-pointer hover:text-mainDark"
           >
-            <FontAwesomeIcon icon={faFolder} size="lg" />
-            <p>{el.name}</p>
-            <div ref={container} className="ml-auto relative">
+            <p>ADD FOLDER</p>
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
+        )}
+        {showInput && (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                placeholder="folder name..."
+                required
+                {...register("folder_name")}
+                className="p-2 rounded"
+              />
+              <button
+                type="submit"
+                className=" font-semibold bg-mainDark px-2 rounded text-white"
+              >
+                ADD
+              </button>
               <FontAwesomeIcon
-                onClick={handleClickOptions}
-                icon={faEllipsisH}
-                size="lg"
+                onClick={handleCancelAddFolder}
+                icon={faTimes}
+                size="xl"
+                className="ml-2 cursor-pointer self-center"
               />
             </div>
+          </form>
+        )}
+      </div>
+      <div>
+        {folders &&
+          folders.length > 0 &&
+          folders.map((el) => (
+            <div
+              key={el.id}
+              className="flex items-center gap-4 bg-secondary2 text-white font-semibold mt-2 p-4 rounded-md cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faFolder} size="lg" />
+              <p>{el.name}</p>
+              <div ref={container} className="ml-auto relative">
+                <FontAwesomeIcon
+                  onClick={handleClickOptions}
+                  icon={faEllipsisH}
+                  size="lg"
+                />
+              </div>
 
-            <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
-          </div>
-        ))}
+              <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

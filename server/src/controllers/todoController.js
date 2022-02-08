@@ -5,6 +5,7 @@ const postTodo = async (req, res, next) => {
     const todo = {
       name: req.body.name,
       description: req.body.description,
+      folderId: req.body.folderId,
       done: false,
     };
 
