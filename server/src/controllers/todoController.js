@@ -1,10 +1,9 @@
-const { Todo } = require("../db");
+const { Todo, Folder } = require("../db");
 
 const postTodo = async (req, res, next) => {
   try {
     const todo = {
-      name: req.body.name,
-      description: req.body.description,
+      name: req.body.todo_name,
       folderId: req.body.folderId,
       done: false,
     };
@@ -36,4 +35,26 @@ const getTodos = async (req, res, next) => {
   }
 };
 
-module.exports = { postTodo, getTodos };
+const getTodosByFolderId = async (req, res, next) => {
+  try {
+
+    const folderId = req.query.id
+
+    const todos = await Folder.findAll({
+      where: {
+        id: folderId,
+      },
+      include: { model: Todo, as: 'todoFolder' },
+    });
+    todos
+      ? res.status(200).json(todos)
+      : res.status(500).json({ message: "cannot get" });
+
+
+  } catch (e) {
+    next(e);
+  }
+};
+
+
+module.exports = { postTodo, getTodos, getTodosByFolderId };

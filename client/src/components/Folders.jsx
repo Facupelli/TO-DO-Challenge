@@ -9,7 +9,7 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-export const Folders = ({ folders, setFolders }) => {
+export const Folders = ({ folders, setFolders, setShowTodos, showTodos, setTodos, handleShowTodos }) => {
   const [showAddFolder, setShowAddFolder] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
@@ -17,6 +17,7 @@ export const Folders = ({ folders, setFolders }) => {
 
   const handleClickOptions = () => {};
 
+  
   //HANDLE ADD FOLDER ---------------------------
 
   const handleShowInput = () => {
@@ -92,8 +93,9 @@ export const Folders = ({ folders, setFolders }) => {
           folders.length > 0 &&
           folders.map((el) => (
             <div
+              onClick={() => handleShowTodos(el.id)}
               key={el.id}
-              className="flex items-center gap-4 bg-secondary2 text-white font-semibold mt-2 p-4 rounded-md cursor-pointer"
+              className="flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md cursor-pointer"
             >
               <FontAwesomeIcon icon={faFolder} size="lg" />
               <p>{el.name}</p>
