@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolder, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFolder,
+  faCaretUp,
+  faEllipsisH,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Folders = ({ folders }) => {
+
+  const container = useRef(document.createElement("div"));
+
+  const handleClickOptions = () => {
+  };
+
   return (
     <div>
       {folders &&
@@ -14,7 +24,15 @@ export const Folders = ({ folders }) => {
           >
             <FontAwesomeIcon icon={faFolder} size="lg" />
             <p>{el.name}</p>
-            <FontAwesomeIcon icon={faCaretUp} size="lg" className="ml-auto" />
+            <div ref={container} className="ml-auto relative">
+              <FontAwesomeIcon
+                onClick={handleClickOptions}
+                icon={faEllipsisH}
+                size="lg"
+              />
+            </div>
+
+            <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
           </div>
         ))}
     </div>

@@ -20,7 +20,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
       file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
   )
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, "/models", file)));
+    modelDefiners.push(require(path.join(__dirname, "./models", file)));
   });
 
 // Injectamos la conexion (sequelize) a todos los modelos
@@ -36,10 +36,10 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Folder, Todo } = sequelize.models;
-
+// console.log("SEQUELIZE MODEL", sequelize.models);
 // Aca vendrian las relaciones
 
-Folder.hasMany(Todo);
+Folder.hasMany(Todo, { as: "todoFolder" });
 Todo.belongsTo(Folder);
 
 module.exports = {
