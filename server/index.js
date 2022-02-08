@@ -1,5 +1,4 @@
 require("dotenv").config();
-const express = require("express");
 const { ENV_VARIABLE } = process.env;
 const { conn } = require("./src/db.js");
 const server = require("./src/app.js");
