@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +7,7 @@ import {
   faTimes,
   faSquareCheck,
   faSquare,
-  faTrash,
+  // faTrash,
   faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,14 +16,6 @@ export const Todos = ({ todos, folderId, setTodos }) => {
   const [showInput, setShowInput] = useState(false);
 
   //HANLDE CHECKBOX -----------------------------
-  const sendPut = async (id, position) => {
-    await axios.put("/todo");
-    console.log("LLEGUE");
-    await axios
-      .get(`/todo?id=${folderId}`)
-      .then((res) => setTodos(res.data[0].todoFolder));
-  };
-
   const handleChange = async (id, done) => {
     const complete = !done;
     const data = {
@@ -63,7 +55,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     reset,
   } = useForm();
 
@@ -73,7 +65,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
         todo_name: data.todo_name,
         folderId,
       };
-      const response = await axios.post("/todo", todo);
+      await axios.post("/todo", todo);
       reset();
       handleCancelAddFolder();
       axios

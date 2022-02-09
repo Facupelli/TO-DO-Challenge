@@ -46,13 +46,13 @@ export const Folders = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("/folder", data);
+      await axios.post("/folder", data);
       reset();
       handleCancelAddFolder();
       axios.get("/folder").then((res) => setFolders(res.data));
