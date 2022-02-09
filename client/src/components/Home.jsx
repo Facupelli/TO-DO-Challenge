@@ -36,6 +36,7 @@ export const Home = () => {
             setFolders={setFolders}
             handleShowTodos={handleShowTodos}
             folderId={folderId}
+            setShowTodos={setShowTodos}
           />
         </div>
         <div className="col-span-1 p-4 bg-mainLight rounded">

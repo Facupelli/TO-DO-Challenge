@@ -100,6 +100,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex gap-2 mb-4">
               <input
+                autoFocus
                 type="text"
                 placeholder="todo..."
                 required

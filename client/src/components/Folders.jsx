@@ -11,13 +11,23 @@ import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-export const Folders = ({ folders, setFolders, handleShowTodos, folderId, }) => {
+export const Folders = ({
+  folders,
+  setFolders,
+  handleShowTodos,
+  folderId,
+  setShowTodos,
+}) => {
   const [showAddFolder, setShowAddFolder] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
   const container = useRef(document.createElement("div"));
 
-  const handleClickOptions = () => {};
+  const handleClickOptions = async (id) => {
+    await axios.delete(`/folder/${id}`);
+    axios.get("/folder").then((res) => setFolders(res.data));
+    setShowTodos(false);
+  };
 
   //HANDLE ADD FOLDER ---------------------------
 
@@ -67,6 +77,7 @@ export const Folders = ({ folders, setFolders, handleShowTodos, folderId, }) => 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex gap-2 mb-4">
               <input
+                autoFocus
                 type="text"
                 placeholder="folder name..."
                 required
@@ -94,22 +105,29 @@ export const Folders = ({ folders, setFolders, handleShowTodos, folderId, }) => 
           folders.length > 0 &&
           folders.map((el) => (
             <div
-              onClick={() => handleShowTodos(el.id)}
               key={el.id}
-              className={`flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md cursor-pointer ${
+              className={`flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md ${
                 folderId === el.id ? "shadow-inner bg-secondaryLight" : ""
               }`}
             >
-              {folderId === el.id ? (
-                <FontAwesomeIcon icon={faFolderOpen} size="lg" />
-              ) : (
-                <FontAwesomeIcon icon={faFolder} size="lg" />
-              )}
+              <div
+                className="flex gap-4 items-center cursor-pointer w-full"
+                onClick={() => handleShowTodos(el.id)}
+              >
+                {folderId === el.id ? (
+                  <FontAwesomeIcon icon={faFolderOpen} size="lg" />
+                ) : (
+                  <FontAwesomeIcon icon={faFolder} size="lg" />
+                )}
 
-              <p className={``}>{el.name}</p>
-              <div ref={container} className="ml-auto relative">
+                <p className={``}>{el.name}</p>
+              </div>
+              <div
+                ref={container}
+                className="ml-auto relative cursor-pointer hover:text-red-500"
+              >
                 <FontAwesomeIcon
-                  onClick={handleClickOptions}
+                  onClick={() => handleClickOptions(el.id)}
                   icon={faEllipsisH}
                   size="lg"
                 />
