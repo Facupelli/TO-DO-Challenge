@@ -39,7 +39,7 @@ const { Folder, Todo } = sequelize.models;
 // console.log("SEQUELIZE MODEL", sequelize.models);
 // Aca vendrian las relaciones
 
-Folder.hasMany(Todo, { as: "todoFolder" });
+Folder.hasMany(Todo, { as: "todoFolder", onDelete: 'cascade', hooks: true });
 Todo.belongsTo(Folder);
 
 module.exports = {

@@ -1,4 +1,4 @@
-const { Folder } = require("../db");
+const { Folder, Todo } = require("../db");
 
 const postFolder = async (req, res, next) => {
   try {
@@ -34,4 +34,27 @@ const getFolders = async (req, res, next) => {
   }
 };
 
-module.exports = { postFolder, getFolders };
+const deleteFolder = async (req, res, next) => {
+  try {
+    const folderId = req.params.id;
+    if (folderId) {
+      const todo = await Folder.findByPk(folderId);
+      if (todo) {
+        await Todo.destroy({
+          where: {folderId: folderId}
+        })
+
+        await Folder.destroy({
+          where: {id: folderId}
+        })
+        res.json({ message: "folder deleted" });
+      }
+    } else {
+      res.status(400).json({ message: "Folder id is required" });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { postFolder, getFolders, deleteFolder };
