@@ -6,7 +6,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <div className={`${darkMode ? 'bg-black' : ''} flex justify-center min-h-screen  `}>
+    <div className={`${darkMode ? 'bg-gray-900' : ''} flex justify-center min-h-screen  `}>
       <Home setDarkMode={setDarkMode} darkMode={darkMode} />
     </div>
   );
