@@ -76,8 +76,7 @@ const getTodosByFolderId = async (req, res, next) => {
 
 const deleteTodo = async (req, res, next) => {
   try {
-    const todoId = req.body.todoId;
-
+    const todoId = req.params.id;
     if (todoId) {
       const todo = await Todo.findByPk(todoId);
       if (todo) {

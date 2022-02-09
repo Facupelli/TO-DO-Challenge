@@ -11,6 +11,6 @@ const {
 router.post("/", postTodo);
 router.get("/", getTodosByFolderId);
 router.put("/", putTodo);
-router.delete("/", deleteTodo);
+router.delete("/:id", deleteTodo);
 
 module.exports = router;

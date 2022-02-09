@@ -7,6 +7,8 @@ import {
   faTimes,
   faSquareCheck,
   faSquare,
+  faTrash,
+  faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const Todos = ({ todos, folderId, setTodos }) => {
@@ -45,6 +47,15 @@ export const Todos = ({ todos, folderId, setTodos }) => {
   const handleCancelAddFolder = () => {
     setShowAddTodo(true);
     setShowInput(false);
+  };
+
+  //----------------------------------------------
+
+  const handleDeleteTodo = async (id) => {
+    await axios.delete(`/todo/${id}`);
+    await axios
+      .get(`/todo?id=${folderId}`)
+      .then((res) => setTodos(res.data[0].todoFolder));
   };
 
   //REACT HOOK FORM  ------------------------------------------
@@ -124,6 +135,14 @@ export const Todos = ({ todos, folderId, setTodos }) => {
               >
                 {el.name}
               </p>
+              <button onClick={() => handleDeleteTodo(el.id)}>
+                <FontAwesomeIcon
+                  onClick={handleCancelAddFolder}
+                  icon={faEllipsisH}
+                  size="lg"
+                  className="text-white mr-6"
+                />
+              </button>
               <button onClick={() => handleChange(el.id, el.done)}>
                 {el.done === true ? (
                   <FontAwesomeIcon
