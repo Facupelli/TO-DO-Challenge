@@ -143,7 +143,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
                   onClick={handleCancelAddFolder}
                   icon={faEllipsisH}
                   size="lg"
-                  className="text-main mr-6"
+                  className="text-secondary hover:text-red-500 mr-6"
                 />
               </button>
               <button onClick={() => handleChange(el.id, el.done)}>

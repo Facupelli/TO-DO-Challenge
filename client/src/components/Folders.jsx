@@ -140,7 +140,7 @@ export const Folders = ({
                   onClick={() => handleClickOptions(el.id)}
                   icon={faEllipsisH}
                   size="lg"
-                  className={folderId === el.id ? "text-secondary" : ""}
+                  className={folderId === el.id ? "text-secondary hover:text-red-500" : ""}
                 />
               </div>
               {folderId === el.id ? (

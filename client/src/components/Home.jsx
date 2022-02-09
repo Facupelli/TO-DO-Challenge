@@ -3,7 +3,7 @@ import { Folders } from "./Folders";
 import { Todos } from "./Todos";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun, faTableList } from "@fortawesome/free-solid-svg-icons";
 
 export const Home = ({ darkMode, setDarkMode }) => {
   const [folders, setFolders] = useState([]);
@@ -47,13 +47,21 @@ export const Home = ({ darkMode, setDarkMode }) => {
       </div>
       <div className="mb-10 flex justify-center">
         <div>
-          <p
-            className={`font-bold text-5xl font-title ${
-              darkMode ? "text-mainLight" : ""
-            }`}
-          >
-            TODO APP
-          </p>
+          <div className="flex items-baseline gap-4">
+            <p
+              className={`font-bold text-5xl font-title drop-shadow ${
+                darkMode ? "text-mainLight" : ""
+              }`}
+            >
+              TODO APP
+            </p>
+            <FontAwesomeIcon
+              icon={faTableList}
+              onClick={handleDarkMode}
+              size="2x"
+              className={`drop-shadow ${darkMode ? "text-mainLight" : ""}`}
+            />
+          </div>
           <p className="text-secondaryLight font-title">by Facupelli</p>
         </div>
       </div>
