@@ -7,7 +7,7 @@ const server = require("./src/app.js");
 const PORT = 3001 || process.env.PORT;
 
 conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
-  server.listen(PORT, async () => {
+  server.listen(process.env.PORT || PORT, async () => {
     try {
       var flat = Boolean(Number(ENV_VARIABLE));
       if (!flat) {
