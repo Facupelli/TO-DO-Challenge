@@ -90,9 +90,9 @@ export const Todos = ({ todos, folderId, setTodos }) => {
         {showAddTodo && (
           <div
             onClick={handleShowInput}
-            className="flex items-center gap-2 font-semibold mb-4 cursor-pointer hover:text-mainDark"
+            className="flex items-center gap-2 font-bold mb-4 cursor-pointer hover:text-mainDark"
           >
-            <p>ADD TODO</p>
+            <p className="text-2xl">ADD TODO</p>
             <FontAwesomeIcon icon={faPlus} />
           </div>
         )}
@@ -132,7 +132,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
               className="bg-main  rounded mt-2 p-2 flex items-center"
             >
               <p
-                className={`${el.done === true ? "line-through" : ""} mr-auto `}
+                className={`${el.done === true ? "line-through" : ""} mr-auto text-xl `}
               >
                 {el.name}
               </p>

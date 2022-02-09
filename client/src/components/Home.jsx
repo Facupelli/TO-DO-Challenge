@@ -25,11 +25,11 @@ export const Home = () => {
     <div className="w-full mt-10 mx-20">
       <div className="mb-10 flex justify-center">
         <div>
-          <p className="font-bold text-4xl">TODO APP</p>
-          <p className="text-gray-500">by Facupelli</p>
+          <p className="font-bold text-5xl font-title">TODO APP</p>
+          <p className="text-gray-500 font-title">by Facupelli</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-6 w-full ">
+      <div className="grid grid-cols-2 gap-6 w-full font-body">
         <div className="col-span-1 p-4 bg-main rounded">
           <Folders
             folders={folders}

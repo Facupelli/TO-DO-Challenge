@@ -67,9 +67,9 @@ export const Folders = ({
         {showAddFolder && (
           <div
             onClick={handleShowInput}
-            className="flex items-center gap-2 font-semibold mb-4 cursor-pointer hover:text-mainDark"
+            className="flex items-center gap-2 font-bold  mb-4 cursor-pointer hover:text-mainDark"
           >
-            <p>ADD FOLDER</p>
+            <p className="text-2xl">ADD FOLDER</p>
             <FontAwesomeIcon icon={faPlus} />
           </div>
         )}
@@ -120,7 +120,7 @@ export const Folders = ({
                   <FontAwesomeIcon icon={faFolder} size="lg" />
                 )}
 
-                <p className={``}>{el.name}</p>
+                <p className="text-xl">{el.name}</p>
               </div>
               <div
                 ref={container}

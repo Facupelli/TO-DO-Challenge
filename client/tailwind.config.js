@@ -15,6 +15,10 @@ module.exports = {
       secondaryLight: "#8098A6",
       secondary2: "#A2D7F5",
     },
+    fontFamily: {
+      title: ["Mate\\ SC", "serif"],
+      body: ['Darker\\ Grotesque', 'sans-serif'],
+    },
   },
   plugins: [],
 };
