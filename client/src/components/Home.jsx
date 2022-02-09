@@ -22,10 +22,10 @@ export const Home = () => {
   };
 
   return (
-    <div className="w-full mt-10 mx-20">
+    <div className="w-full pt-10 mx-20 ">
       <div className="mb-10 flex justify-center">
         <div>
-          <p className="font-bold text-5xl font-title">TODO APP</p>
+          <p className="font-bold text-5xl font-title ">TODO APP</p>
           <p className="text-gray-500 font-title">by Facupelli</p>
         </div>
       </div>
@@ -39,7 +39,7 @@ export const Home = () => {
             setShowTodos={setShowTodos}
           />
         </div>
-        <div className="col-span-1 p-4 bg-mainLight rounded">
+        <div className="col-span-1 p-4 bg-secondaryLight rounded">
           {showTodos && (
             <Todos
               todos={todos}

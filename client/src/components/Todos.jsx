@@ -109,7 +109,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
               />
               <button
                 type="submit"
-                className=" font-semibold bg-mainDark px-2 rounded text-white"
+                className=" font-semibold bg-mainDark hover:bg-secondary px-2 rounded text-white"
               >
                 ADD
               </button>
@@ -141,7 +141,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
                   onClick={handleCancelAddFolder}
                   icon={faEllipsisH}
                   size="lg"
-                  className="text-white mr-6"
+                  className="text-main mr-6"
                 />
               </button>
               <button onClick={() => handleChange(el.id, el.done)}>
@@ -150,14 +150,14 @@ export const Todos = ({ todos, folderId, setTodos }) => {
                     onClick={handleCancelAddFolder}
                     icon={faSquareCheck}
                     size="lg"
-                    className="text-white"
+                    className="text-secondary"
                   />
                 ) : (
                   <FontAwesomeIcon
                     onClick={handleCancelAddFolder}
                     icon={faSquare}
                     size="lg"
-                    className="text-white"
+                    className="text-secondary"
                   />
                 )}
               </button>

@@ -86,7 +86,7 @@ export const Folders = ({
               />
               <button
                 type="submit"
-                className=" font-semibold bg-mainDark px-2 rounded text-white"
+                className=" font-semibold bg-mainDark hover:bg-secondary px-2 rounded text-white"
               >
                 ADD
               </button>
@@ -107,7 +107,7 @@ export const Folders = ({
             <div
               key={el.id}
               className={`flex items-center gap-4 bg-secondary text-white font-semibold mt-2 p-4 rounded-md ${
-                folderId === el.id ? "shadow-inner bg-secondaryLight" : ""
+                folderId === el.id ? "shadow-inner bg-mainLight" : ""
               }`}
             >
               <div
@@ -115,12 +115,12 @@ export const Folders = ({
                 onClick={() => handleShowTodos(el.id)}
               >
                 {folderId === el.id ? (
-                  <FontAwesomeIcon icon={faFolderOpen} size="lg" />
+                  <FontAwesomeIcon icon={faFolderOpen} size="lg" className="text-secondary"/>
                 ) : (
                   <FontAwesomeIcon icon={faFolder} size="lg" />
                 )}
 
-                <p className="text-xl">{el.name}</p>
+                <p className={`text-xl ${folderId === el.id ? 'text-secondary' : ''}`}>{el.name}</p>
               </div>
               <div
                 ref={container}
@@ -130,10 +130,11 @@ export const Folders = ({
                   onClick={() => handleClickOptions(el.id)}
                   icon={faEllipsisH}
                   size="lg"
+                  className={folderId === el.id ? 'text-secondary': ''}
                 />
               </div>
               {folderId === el.id ? (
-                <FontAwesomeIcon icon={faCaretRight} size="lg" className="" />
+                <FontAwesomeIcon icon={faCaretRight} size="lg" className="text-secondary" />
               ) : (
                 <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
               )}

@@ -5,15 +5,15 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
+      black: colors.black,
       white: colors.white,
       gray: colors.gray,
       red: colors.red,
-      main: "#F4D0A1",
-      mainDark: "#A8885E",
-      mainLight: "#FFE4C2",
-      secondary: "#4D88A8",
-      secondaryLight: "#8098A6",
-      secondary2: "#A2D7F5",
+      main: "#E9E5BA",
+      mainDark: "#696754",
+      mainLight: "#ECE276",
+      secondary: "#696434",
+      secondaryLight: "#B5B291",
     },
     fontFamily: {
       title: ["Mate\\ SC", "serif"],
