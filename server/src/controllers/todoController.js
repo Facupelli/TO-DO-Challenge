@@ -29,7 +29,6 @@ const putTodo = async (req, res, next) => {
 
     if(todoId){
       const todo = await Todo.findByPk(todoId);
-      console.log('todo', todo)
       if(todo){
         if(done){
           todo.done = done

@@ -10,6 +10,7 @@ export const Home = () => {
   const [showTodos, setShowTodos] = useState(false);
   const [todos, setTodos] = useState([]);
 
+
   useEffect(() => {
     axios.get("/folder").then((res) => setFolders(res.data));
   }, []);

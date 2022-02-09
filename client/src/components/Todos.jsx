@@ -2,23 +2,40 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faTimes,
+  faSquareCheck,
+  faSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Todos = ({ todos, folderId, setTodos }) => {
   const [showAddTodo, setShowAddTodo] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
-  //HANLDE CHECKBOC -----------------------------
-
-  const handleChange = (id) => {
-    const data = {
-      todoId: id,
-      done: true,
-    };
-    axios.put("/todo", data);
+  //HANLDE CHECKBOX -----------------------------
+  const sendPut = async (id, position) => {
+    await axios.put("/todo");
+    console.log("LLEGUE");
+    await axios
+      .get(`/todo?id=${folderId}`)
+      .then((res) => setTodos(res.data[0].todoFolder));
   };
 
-  //HANDLE ADD FOLDER ---------------------------
+  const handleChange = async (id, done) => {
+    const complete = !done;
+    const data = {
+      todoId: id,
+      done: complete,
+    };
+
+    await axios.put("/todo", data);
+    await axios
+      .get(`/todo?id=${folderId}`)
+      .then((res) => setTodos(res.data[0].todoFolder));
+  };
+
+  //HANDLE ADD TODO ---------------------------
 
   const handleShowInput = () => {
     setShowInput(true);
@@ -97,17 +114,33 @@ export const Todos = ({ todos, folderId, setTodos }) => {
       <div>
         {todos &&
           todos.length > 0 &&
-          todos.map((el) => (
+          todos.map((el, index) => (
             <div
               key={el.id}
               className="bg-main  rounded mt-2 p-2 flex items-center"
             >
-              <p>{el.name}</p>
-              <input
-                onChange={() => handleChange(el.id)}
-                type="checkbox"
-                className="ml-auto"
-              />
+              <p
+                className={`${el.done === true ? "line-through" : ""} mr-auto `}
+              >
+                {el.name}
+              </p>
+              <button onClick={() => handleChange(el.id, el.done)}>
+                {el.done === true ? (
+                  <FontAwesomeIcon
+                    onClick={handleCancelAddFolder}
+                    icon={faSquareCheck}
+                    size="lg"
+                    className="text-white"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    onClick={handleCancelAddFolder}
+                    icon={faSquare}
+                    size="lg"
+                    className="text-white"
+                  />
+                )}
+              </button>
             </div>
           ))}
       </div>
