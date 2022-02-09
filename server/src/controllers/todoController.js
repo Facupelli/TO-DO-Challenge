@@ -25,22 +25,20 @@ const postTodo = async (req, res, next) => {
 
 const putTodo = async (req, res, next) => {
   try {
-    const {todoId, done} = req.body
+    const { todoId, done } = req.body;
 
-    if(todoId){
+    if (todoId) {
       const todo = await Todo.findByPk(todoId);
-      if(todo){
-        if(done){
-          todo.done = done
-          await todo.save()
+      if (todo) {
+        if (done) {
+          todo.done = done;
+          await todo.save();
           res.json({ message: "Successfully edited todo" });
         }
       }
-
-    }else {
+    } else {
       res.status(400).json({ message: "Todo id is required" });
     }
-
   } catch (e) {
     next(e);
   }
@@ -76,4 +74,24 @@ const getTodosByFolderId = async (req, res, next) => {
   }
 };
 
-module.exports = { postTodo, getTodos, getTodosByFolderId, putTodo };
+const deleteTodo = async (req, res, next) => {
+  try {
+    const todoId = req.body.todoId;
+
+    if (todoId) {
+      const todo = await Todo.findByPk(todoId);
+      if (todo) {
+        await Todo.destroy({
+          where: {id: todoId}
+        })
+        res.json({ message: "todo deleted" });
+      }
+    } else {
+      res.status(400).json({ message: "Todo id is required" });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { postTodo, getTodos, getTodosByFolderId, putTodo, deleteTodo };
