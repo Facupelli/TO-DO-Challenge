@@ -13,7 +13,7 @@ conn.sync({ force: Boolean(Number(ENV_VARIABLE)) }).then(() => {
       if (!flat) {
         console.log(`Force ${flat}, datos no cargados`);
       }
-      console.log(`--------listening on port ${PORT}---------`); // eslint-disable-line no-console
+      console.log(`--------listening on port ${process.env.PORT ? process.env.PORT : PORT}---------`); // eslint-disable-line no-console
     } catch (e) {
       console.log(e);
     }
