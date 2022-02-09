@@ -90,7 +90,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
         {showAddTodo && (
           <div
             onClick={handleShowInput}
-            className="flex items-center gap-2 font-bold mb-4 cursor-pointer hover:text-mainDark"
+            className="flex items-center gap-2 font-bold mb-4 transition ease-in-out duration-200 cursor-pointer hover:text-mainDark"
           >
             <p className="text-2xl">ADD TODO</p>
             <FontAwesomeIcon icon={faPlus} />
@@ -105,11 +105,11 @@ export const Todos = ({ todos, folderId, setTodos }) => {
                 placeholder="todo..."
                 required
                 {...register("todo_name")}
-                className="p-2 rounded"
+                className="appearance-none p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               />
               <button
                 type="submit"
-                className=" font-semibold bg-mainDark hover:bg-secondary px-2 rounded text-white"
+                className=" font-semibold bg-mainDark transition ease-in-out duration-200 hover:bg-secondary px-2 rounded text-white"
               >
                 ADD
               </button>
@@ -132,7 +132,9 @@ export const Todos = ({ todos, folderId, setTodos }) => {
               className="bg-main  rounded mt-2 p-2 flex items-center"
             >
               <p
-                className={`${el.done === true ? "line-through" : ""} mr-auto text-xl `}
+                className={`${
+                  el.done === true ? "line-through" : ""
+                } mr-auto text-xl `}
               >
                 {el.name}
               </p>
@@ -150,14 +152,14 @@ export const Todos = ({ todos, folderId, setTodos }) => {
                     onClick={handleCancelAddFolder}
                     icon={faSquareCheck}
                     size="lg"
-                    className="text-secondary"
+                    className="text-secondary "
                   />
                 ) : (
                   <FontAwesomeIcon
                     onClick={handleCancelAddFolder}
                     icon={faSquare}
                     size="lg"
-                    className="text-secondary"
+                    className="text-secondary transition ease-in-out duration-200 hover:text-secondaryLight"
                   />
                 )}
               </button>

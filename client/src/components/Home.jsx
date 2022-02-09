@@ -23,21 +23,37 @@ export const Home = ({ darkMode, setDarkMode }) => {
   };
 
   const handleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+    setDarkMode(!darkMode);
+  };
 
   return (
     <div className="w-full pt-10 mx-20 ">
-      <div onClick={handleDarkMode} className="flex justify-end cursor-pointer ">
+      <div className="flex justify-end  ">
         {darkMode ? (
-          <FontAwesomeIcon icon={faSun} size='xl' className="text-main hover:text-secondary"/>
+          <FontAwesomeIcon
+            icon={faSun}
+            onClick={handleDarkMode}
+            size="xl"
+            className="text-main transition ease-in-out duration-200 hover:text-secondary cursor-pointer"
+          />
         ) : (
-          <FontAwesomeIcon icon={faMoon} size='xl' className="text-secondary hover:text-main"/>
+          <FontAwesomeIcon
+            icon={faMoon}
+            onClick={handleDarkMode}
+            size="xl"
+            className="transition ease-in-out duration-150 text-secondary hover:text-main cursor-pointer"
+          />
         )}
       </div>
       <div className="mb-10 flex justify-center">
         <div>
-          <p className={`font-bold text-5xl font-title ${darkMode? 'text-mainLight':''}`}>TODO APP</p>
+          <p
+            className={`font-bold text-5xl font-title ${
+              darkMode ? "text-mainLight" : ""
+            }`}
+          >
+            TODO APP
+          </p>
           <p className="text-secondaryLight font-title">by Facupelli</p>
         </div>
       </div>

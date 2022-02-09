@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFolder,
@@ -67,7 +67,7 @@ export const Folders = ({
         {showAddFolder && (
           <div
             onClick={handleShowInput}
-            className="flex items-center gap-2 font-bold  mb-4 cursor-pointer hover:text-mainDark"
+            className="flex items-center gap-2 font-bold  mb-4 transition ease-in-out duration-200 cursor-pointer hover:text-mainDark "
           >
             <p className="text-2xl">ADD FOLDER</p>
             <FontAwesomeIcon icon={faPlus} />
@@ -82,11 +82,11 @@ export const Folders = ({
                 placeholder="folder name..."
                 required
                 {...register("folder_name")}
-                className="p-2 rounded"
+                className="appearance-none p-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               />
               <button
                 type="submit"
-                className=" font-semibold bg-mainDark hover:bg-secondary px-2 rounded text-white"
+                className=" font-semibold bg-mainDark transition ease-in-out duration-200 hover:bg-secondary px-2 rounded text-white"
               >
                 ADD
               </button>
@@ -115,26 +115,40 @@ export const Folders = ({
                 onClick={() => handleShowTodos(el.id)}
               >
                 {folderId === el.id ? (
-                  <FontAwesomeIcon icon={faFolderOpen} size="lg" className="text-secondary"/>
+                  <FontAwesomeIcon
+                    icon={faFolderOpen}
+                    size="lg"
+                    className="text-secondary"
+                  />
                 ) : (
                   <FontAwesomeIcon icon={faFolder} size="lg" />
                 )}
 
-                <p className={`text-xl ${folderId === el.id ? 'text-secondary' : ''}`}>{el.name}</p>
+                <p
+                  className={`text-xl ${
+                    folderId === el.id ? "text-secondary" : ""
+                  }`}
+                >
+                  {el.name}
+                </p>
               </div>
               <div
                 ref={container}
-                className="ml-auto relative cursor-pointer hover:text-red-500"
+                className="ml-auto relative cursor-pointer transition ease-in-out duration-200 hover:text-red-500"
               >
                 <FontAwesomeIcon
                   onClick={() => handleClickOptions(el.id)}
                   icon={faEllipsisH}
                   size="lg"
-                  className={folderId === el.id ? 'text-secondary': ''}
+                  className={folderId === el.id ? "text-secondary" : ""}
                 />
               </div>
               {folderId === el.id ? (
-                <FontAwesomeIcon icon={faCaretRight} size="lg" className="text-secondary" />
+                <FontAwesomeIcon
+                  icon={faCaretRight}
+                  size="lg"
+                  className="text-secondary"
+                />
               ) : (
                 <FontAwesomeIcon icon={faCaretUp} size="lg" className="" />
               )}
