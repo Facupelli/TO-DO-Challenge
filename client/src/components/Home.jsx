@@ -34,7 +34,7 @@ export const Home = ({ darkMode, setDarkMode }) => {
   };
 
   return (
-    <div className="w-full pt-10 mx-20 ">
+    <div className="w-full pt-6 md:pt-10 mx-6 md:mx-20 ">
       <div className="flex justify-end  ">
         {darkMode ? (
           <FontAwesomeIcon
@@ -73,7 +73,7 @@ export const Home = ({ darkMode, setDarkMode }) => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-6 w-full font-body">
-        <div className="col-span-1 p-4 bg-main rounded">
+        <div className="col-span-2 md:col-span-1 p-4 bg-main rounded">
           <Folders
             folders={folders}
             setFolders={setFolders}
@@ -82,7 +82,7 @@ export const Home = ({ darkMode, setDarkMode }) => {
             setShowTodos={setShowTodos}
           />
         </div>
-        <div className="col-span-1 p-4 bg-secondaryLight rounded">
+        <div className="col-span-2 md:col-span-1 p-4 bg-secondaryLight rounded">
           {showTodos && (
             <Todos todos={todos} setTodos={setTodos} folderId={folderId} />
           )}
