@@ -33,6 +33,8 @@ const putTodo = async (req, res, next) => {
         todo.done = done;
         await todo.save();
         res.json({ message: "Successfully edited todo" });
+      }else{
+        res.status(400).json({ message: "Todo not founded" });
       }
     } else {
       res.status(400).json({ message: "Todo id is required" });
