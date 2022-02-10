@@ -17,9 +17,16 @@ export const Home = ({ darkMode, setDarkMode }) => {
   }, []);
 
   const handleShowTodos = (id) => {
-    setShowTodos(true);
-    axios.get(`/todo?id=${id}`).then((res) => setTodos(res.data[0].todoFolder));
-    setFolderId(id);
+    if (folderId === id) {
+      setShowTodos(!showTodos);
+      setFolderId(null)
+    } else {
+      setShowTodos(true);
+      axios
+        .get(`/todo?id=${id}`)
+        .then((res) => setTodos(res.data[0].todoFolder));
+      setFolderId(id);
+    }
   };
 
   const handleDarkMode = () => {
