@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,12 +15,13 @@ export const Todos = ({ todos, folderId, setTodos }) => {
   const [showAddTodo, setShowAddTodo] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
+ 
+
   //HANLDE CHECKBOX -----------------------------
   const handleChange = async (id, done) => {
-    const complete = !done;
     const data = {
       todoId: id,
-      done: complete,
+      done: !done,
     };
 
     await axios.put("/todo", data);
@@ -28,6 +29,7 @@ export const Todos = ({ todos, folderId, setTodos }) => {
       .get(`/todo?id=${folderId}`)
       .then((res) => setTodos(res.data[0].todoFolder));
   };
+  
 
   //HANDLE ADD TODO ---------------------------
 

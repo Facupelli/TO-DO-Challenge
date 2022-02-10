@@ -34,7 +34,7 @@ export const Home = ({ darkMode, setDarkMode }) => {
   };
 
   return (
-    <div className="w-full pt-6 md:pt-10 mx-6 md:mx-20 ">
+    <div className="w-full pt-6 md:pt-10 mx-6 md:mx-12 lg:mx-20 ">
       <div className="flex justify-end  ">
         {darkMode ? (
           <FontAwesomeIcon
