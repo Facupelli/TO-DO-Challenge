@@ -6,3 +6,4 @@ This project was build with React and Sequelize.
 
 <img src="./client/media/home1.png" alt="start_screen"/>
 <img src="./client/media/home2.png" alt="start_screen"/>
+<img src="./client/media/responsive.png" alt="start_screen"/>
